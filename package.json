@@ -1,0 +1,8 @@
+{
+  "name": "d3-playground",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "d3": ""
+  }
+}

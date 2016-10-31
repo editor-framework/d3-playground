@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body {
+    width: 100%;
+    margin: 1px;
+  }
+
+  div {
+    width: 10px;
+    height: 10px;
+    margin: 1px 0 0 1px;
+    float: left;
+    background: #eee;
+    display: inline-block;
+  }
+</style>
+<script src="app://node_modules/d3/build/d3.min.js"></script>
+
+<body>
+<script>
+'use strict';
+
+const n = 1000;
+const whiteblue = d3.interpolateRgb('#eee', 'steelblue');
+const blueorange = d3.interpolateRgb('steelblue', 'orange');
+const orangewhite = d3.interpolateRgb('orange', '#eee');
+
+d3.select('body').selectAll('div')
+  .data(d3.range(n))
+  .enter()
+  .append('div')
+  .transition()
+  .delay((d, i) => { return i + Math.random() * n / 4; })
+  .ease(d3.easeLinear)
+  .on('start', function repeat () {
+    d3.active(this)
+      .styleTween('background-color', () => { return whiteblue; })
+      .transition()
+      .delay(1000)
+      .styleTween('background-color', () => { return blueorange; })
+      .transition()
+      .delay(1000)
+      .styleTween('background-color', () => { return orangewhite; })
+      .transition()
+      .delay(n)
+      .on('start', repeat);
+  });
+
+</script>
+</body>
